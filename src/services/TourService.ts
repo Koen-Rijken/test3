@@ -2,11 +2,15 @@ import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
 class TourService {
-  private driverObj = driver({
-    animate: true,
-    showProgress: true,
-    smoothScroll: true,
-  });
+  private driverObj;
+
+  constructor() {
+    this.driverObj = driver({
+      animate: true,
+      showProgress: true,
+      smoothScroll: true,
+    });
+  }
 
   startProductsTour() {
     this.driverObj.defineSteps([
