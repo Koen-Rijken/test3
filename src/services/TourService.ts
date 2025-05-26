@@ -13,7 +13,7 @@ class TourService {
   }
 
   startProductsTour() {
-    this.driverObj.defineSteps([
+    this.driverObj.setSteps([
       {
         element: '#products-heading',
         popover: {
@@ -47,7 +47,7 @@ class TourService {
   }
 
   startProfileTour() {
-    this.driverObj.defineSteps([
+    this.driverObj.setSteps([
       {
         element: '#profile-info',
         popover: {
@@ -72,7 +72,7 @@ class TourService {
   }
 
   startInvoicesTour() {
-    this.driverObj.defineSteps([
+    this.driverObj.setSteps([
       {
         element: '#invoices-table',
         popover: {
