@@ -43,7 +43,7 @@ class TourService {
       }
     ]);
 
-    this.driverObj.start();
+    this.driverObj.drive();
   }
 
   startProfileTour() {
@@ -68,7 +68,7 @@ class TourService {
       }
     ]);
 
-    this.driverObj.start();
+    this.driverObj.drive();
   }
 
   startInvoicesTour() {
@@ -93,7 +93,7 @@ class TourService {
       }
     ]);
 
-    this.driverObj.start();
+    this.driverObj.drive();
   }
 }
 
