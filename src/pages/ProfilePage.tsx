@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { useTheme } from '../context/ThemeContext';
-import { User, Mail, Shield, Check, X } from 'lucide-react';
+import { User, Mail, Shield, Check, X, HelpCircle } from 'lucide-react';
+import { tourService } from '../services/TourService';
 
 const ProfilePage: React.FC = () => {
   const { currentUser } = useUser();
@@ -33,10 +34,17 @@ const ProfilePage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">My Profile</h1>
       
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden transition-all duration-300">
+      <div id="profile-info" className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden transition-all duration-300">
         <div className="px-4 py-5 sm:px-6 bg-gray-50 dark:bg-gray-700">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white flex items-center">
             User Information
+            <button
+              onClick={() => tourService.startProfileTour()}
+              className="ml-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+              title="Start Tour"
+            >
+              <HelpCircle className="h-5 w-5" />
+            </button>
           </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-300">
             Personal details and account settings

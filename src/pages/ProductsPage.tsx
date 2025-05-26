@@ -1,19 +1,29 @@
 import React from 'react';
 import { products } from '../data/products';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, HelpCircle } from 'lucide-react';
+import { tourService } from '../services/TourService';
 
 const ProductsPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Network Equipment</h1>
+      <div className="flex justify-between items-center mb-8" id="products-heading">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Network Equipment
+          <button
+            onClick={() => tourService.startProductsTour()}
+            className="ml-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+            title="Start Tour"
+          >
+            <HelpCircle className="h-5 w-5" />
+          </button>
+        </h1>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((product) => (
           <div 
             key={product.id} 
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
+            className="product-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1"
           >
             <div className="h-48 overflow-hidden">
               <img 
@@ -30,7 +40,7 @@ const ProductsPage: React.FC = () => {
                   ${product.price.toFixed(2)}
                 </span>
                 <button 
-                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                  className="add-to-cart-btn inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                 >
                   <ShoppingCart className="h-4 w-4 mr-1" />
                   Add to Cart

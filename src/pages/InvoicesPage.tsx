@@ -1,7 +1,8 @@
 import React from 'react';
 import { useUser } from '../context/UserContext';
 import { getUserInvoices } from '../data/invoices';
-import { FileClock, FileCheck, FileWarning } from 'lucide-react';
+import { FileClock, FileCheck, FileWarning, HelpCircle } from 'lucide-react';
+import { tourService } from '../services/TourService';
 
 const InvoicesPage: React.FC = () => {
   const { currentUser } = useUser();
@@ -23,14 +24,23 @@ const InvoicesPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">My Invoices</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+        My Invoices
+        <button
+          onClick={() => tourService.startInvoicesTour()}
+          className="ml-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+          title="Start Tour"
+        >
+          <HelpCircle className="h-5 w-5" />
+        </button>
+      </h1>
       
       {userInvoices.length === 0 ? (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center">
           <p className="text-gray-600 dark:text-gray-300">You don't have any invoices yet.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div id="invoices-table" className="overflow-x-auto">
           <table className="min-w-full bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
             <thead className="bg-gray-100 dark:bg-gray-700">
               <tr>
@@ -69,7 +79,7 @@ const InvoicesPage: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       {getStatusIcon(invoice.status)}
-                      <span className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      <span className={`invoice-status ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                         invoice.status === 'paid' 
                           ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
                           : invoice.status === 'pending'
