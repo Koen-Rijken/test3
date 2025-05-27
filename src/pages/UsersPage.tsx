@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { users } from '../data/users';
+import { users as initialUsers } from '../data/users';
 import { Check, Edit, Lock, Unlock, Trash2, UserPlus, X, UserCheck, UserX } from 'lucide-react';
 
 interface EditableUser extends User {
@@ -10,7 +10,7 @@ interface EditableUser extends User {
 
 const UsersPage: React.FC = () => {
   const [editableUsers, setEditableUsers] = useState<EditableUser[]>(
-    users.map(user => ({ ...user, isEditing: false, isLocked: false, isEnrolled: false }))
+    initialUsers.map(user => ({ ...user, isEditing: false, isLocked: false, isEnrolled: true }))
   );
 
   const handleEnrolToggle = (userId: string) => {
@@ -71,6 +71,9 @@ const UsersPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Manage Users</h1>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          Total Users: {editableUsers.length} ({editableUsers.filter(u => u.role === 'admin').length} admins)
+        </div>
         <button className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
           <UserPlus className="mr-2 h-4 w-4" />
           Add User
@@ -102,14 +105,20 @@ const UsersPage: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.isEditing ? (
                       <input
+                        id={`name-${user.id}`}
                         type="text"
                         value={user.name}
                         onChange={(e) => handleChange(user.id, 'name', e.target.value)}
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     ) : (
-                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                      <div className="text-sm font-medium text-gray-900 dark:text-white flex items-center">
                         {user.name}
+                        {user.role === 'admin' && (
+                          <span className="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                            Admin
+                          </span>
+                        )}
                       </div>
                     )}
                   </td>
