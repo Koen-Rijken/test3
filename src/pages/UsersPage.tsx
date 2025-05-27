@@ -27,14 +27,14 @@ const UsersPage: React.FC = () => {
 
   const handleAddUser = () => {
     const user = addUser(newUser);
-    const user: EditableUser = {
+    const editableUser: EditableUser = {
       ...user,
       isEditing: false,
       isLocked: false,
       isEnrolled: true
     };
     
-    setEditableUsers(prev => [...prev, user]);
+    setEditableUsers(prev => [...prev, editableUser]);
     setNewUser({ name: '', email: '', role: 'user' });
     setIsModalOpen(false);
   };
