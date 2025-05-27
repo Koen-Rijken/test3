@@ -1,6 +1,6 @@
 import { User } from '../types';
 
-export const users: User[] = [
+let users: User[] = [
   {
     id: '1',
     name: 'Koen Rijken',
@@ -36,3 +36,16 @@ export const users: User[] = [
 export const getUserByEmail = (email: string): User | undefined => {
   return users.find(user => user.email === email);
 };
+
+export const addUser = (user: Omit<User, 'id'>): User => {
+  const maxId = Math.max(...users.map(u => parseInt(u.id)));
+  const newUser = {
+    ...user,
+    id: (maxId + 1).toString()
+  };
+  
+  users = [...users, newUser];
+  return newUser;
+};
+
+export { users };

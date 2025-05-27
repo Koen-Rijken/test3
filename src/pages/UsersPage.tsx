@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { users as initialUsers } from '../data/users';
+import { users as initialUsers, addUser } from '../data/users';
 import { Check, Edit, Lock, Unlock, Trash2, UserPlus, X, UserCheck, UserX, Mail, User as UserIcon } from 'lucide-react';
 
 interface EditableUser extends User {
@@ -26,10 +26,9 @@ const UsersPage: React.FC = () => {
   });
 
   const handleAddUser = () => {
-    const userId = (Math.max(...editableUsers.map(u => parseInt(u.id))) + 1).toString();
+    const user = addUser(newUser);
     const user: EditableUser = {
-      ...newUser,
-      id: userId,
+      ...user,
       isEditing: false,
       isLocked: false,
       isEnrolled: true
