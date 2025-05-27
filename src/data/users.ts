@@ -29,7 +29,7 @@ let users: User[] = [
     id: '5',
     name: 'John Rijken',
     email: 'john.rijken@me.com',
-    role: 'admin'
+    role: 'user'
   },
   {
     id: '6',
